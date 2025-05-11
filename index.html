@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI & IoT Quiz</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="darkModeToggle" onclick="toggleDarkMode()">🌙</div>
+
+  <!-- Start Page -->
+  <div id="startPage">
+    <h1>Welcome to the AI & IoT Quiz</h1>
+    <input type="text" id="userNameInput" placeholder="Enter your name..." />
+    <button onclick="startQuiz()">Start Quiz</button>
+  </div>
+
+  <!-- Quiz Container -->
+  <div id="quizContainer">
+    <div id="timerCircle">15</div>
+    <div id="questionBox"></div>
+    <div id="optionsBox"></div>
+    <div style="text-align: center; margin-top: 15px;">
+      <button id="prevBtn" onclick="prevQuestion()">Previous</button>
+      <button id="nextBtn" onclick="nextQuestion()">Next</button>
+      <button id="submitBtn" onclick="submitAnswer()">Submit</button>
+      <button id="retryQuizBtn" onclick="retryQuiz()" style="display:none;">Retry</button>
+    </div>
+    <div id="scoreBox"></div>
+    <div id="resultBox"></div>
+    <div style="text-align: center; margin-top: 10px;">
+      <button id="exportBtn" onclick="exportScore()" style="display:none;">Export Result</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
