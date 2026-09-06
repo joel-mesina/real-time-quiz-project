@@ -1,39 +1,520 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI & IoT Quiz</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div id="darkModeToggle" onclick="toggleDarkMode()">🌙</div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="AI & IoT Quiz Arena: a polished local browser-based quiz platform for AI and IoT knowledge."
+    />
+    <title>AI & IoT Quiz Arena</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand-block" aria-label="AI & IoT Quiz Arena brand area">
+          <div class="brand-mark">AI</div>
+          <div>
+            <p class="eyebrow">Portfolio Project</p>
+            <h1>AI & IoT Quiz Arena</h1>
+          </div>
+        </div>
 
-  <!-- Start Page -->
-  <div id="startPage">
-    <h1>Welcome to the AI & IoT Quiz</h1>
-    <input type="text" id="userNameInput" placeholder="Enter your name..." />
-    <button onclick="startQuiz()">Start Quiz</button>
-  </div>
+        <nav class="main-nav" aria-label="Main navigation">
+          <button class="nav-btn active" type="button" data-page="home">Home</button>
+          <button class="nav-btn" type="button" data-page="home">Explore</button>
+          <button class="nav-btn" type="button" data-page="leaderboard">Leaderboard</button>
+          <button class="nav-btn" type="button" data-page="history">My Quizzes</button>
+          <button class="nav-btn" type="button" data-page="analytics">Insights</button>
+          <button class="nav-btn" type="button" data-page="history">Profile</button>
+          <button
+            id="themeToggle"
+            class="theme-toggle"
+            type="button"
+            aria-label="Toggle dark and light mode"
+            title="Toggle dark mode"
+          >
+            <span class="theme-icon" aria-hidden="true">🌙</span>
+          </button>
+        </nav>
+      </header>
 
-  <!-- Quiz Container -->
-  <div id="quizContainer">
-    <div id="timerCircle">15</div>
-    <div id="questionBox"></div>
-    <div id="optionsBox"></div>
-    <div style="text-align: center; margin-top: 15px;">
-      <button id="prevBtn" onclick="prevQuestion()">Previous</button>
-      <button id="nextBtn" onclick="nextQuestion()">Next</button>
-      <button id="submitBtn" onclick="submitAnswer()">Submit</button>
-      <button id="retryQuizBtn" onclick="retryQuiz()" style="display:none;">Retry</button>
+      <main class="page-content">
+        <section id="homePage" class="page-panel active" aria-label="Home page">
+          <div class="hero-card glass-card">
+            <div class="hero-copy">
+              <p class="section-tag">Challenge your knowledge</p>
+              <h2>Sharpen your AI and IoT expertise.</h2>
+              <p>
+                Practice machine learning, connected devices, smart systems, and modern digital infrastructure through a polished local challenge designed for learning and portfolio presentation.
+              </p>
+              <div class="hero-actions">
+                <button id="startQuizBtn" class="primary-btn" type="button">Start Quiz</button>
+                <button id="howToPlayBtn" class="secondary-btn" type="button">How to Play</button>
+                <button id="viewLeaderboardBtn" class="secondary-btn" type="button">View Leaderboard</button>
+              </div>
+            </div>
+
+            <div class="hero-visual" aria-label="Feature spotlight">
+              <div class="orb orb-1"></div>
+              <div class="orb orb-2"></div>
+              <div class="slider-shell">
+                <div class="feature-slide active">
+                  <span class="slide-label">Neural flow</span>
+                  <h3>AI Decisions</h3>
+                  <p>Understand models, data patterns, and learning systems faster.</p>
+                </div>
+                <div class="feature-slide">
+                  <span class="slide-label">Connected systems</span>
+                  <h3>IoT Intelligence</h3>
+                  <p>Explore sensors, gateways, edge systems, and smart automation.</p>
+                </div>
+                <div class="feature-slide">
+                  <span class="slide-label">Future ready</span>
+                  <h3>Smart Infrastructure</h3>
+                  <p>See how AI and IoT work together in real-world platforms.</p>
+                </div>
+                <div class="slide-dots" aria-label="Feature slides">
+                  <span class="dot active"></span>
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                </div>
+              </div>
+
+              <div class="hero-stats" aria-label="Platform highlights">
+                <div class="stat-card">
+                  <strong>30+</strong>
+                  <span>Questions</span>
+                </div>
+                <div class="stat-card">
+                  <strong>3</strong>
+                  <span>Categories</span>
+                </div>
+                <div class="stat-card">
+                  <strong>4</strong>
+                  <span>Modes</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="showcase-grid">
+            <div class="showcase-card glass-card">
+              <div class="showcase-header">
+                <p class="section-tag">Popular categories</p>
+                <span class="chip muted">Updated weekly</span>
+              </div>
+              <div class="category-stack">
+                <div class="category-pill"><span>AI</span><strong>Machine Learning</strong></div>
+                <div class="category-pill"><span>IoT</span><strong>Smart Systems</strong></div>
+                <div class="category-pill"><span>Mixed</span><strong>Cross-discipline</strong></div>
+              </div>
+            </div>
+
+            <div class="showcase-card glass-card">
+              <div class="showcase-header">
+                <p class="section-tag">Featured quizzes</p>
+                <span class="chip accent">3 live</span>
+              </div>
+              <div class="feature-list">
+                <div class="feature-row">
+                  <div>
+                    <strong>AI Foundations</strong>
+                    <small>18 questions • 12 min</small>
+                  </div>
+                  <span class="pill success">Easy</span>
+                </div>
+                <div class="feature-row">
+                  <div>
+                    <strong>Connected Devices</strong>
+                    <small>22 questions • 16 min</small>
+                  </div>
+                  <span class="pill warning">Medium</span>
+                </div>
+                <div class="feature-row">
+                  <div>
+                    <strong>Edge Intelligence</strong>
+                    <small>14 questions • 10 min</small>
+                  </div>
+                  <span class="pill primary">Hard</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="showcase-card glass-card">
+              <div class="showcase-header">
+                <p class="section-tag">Platform stats</p>
+              </div>
+              <div class="mini-metric-grid">
+                <div><strong>30+</strong><span>Questions</span></div>
+                <div><strong>4</strong><span>Modes</span></div>
+                <div><strong>96%</strong><span>UX score</span></div>
+              </div>
+            </div>
+
+            <div class="showcase-card glass-card">
+              <div class="showcase-header">
+                <p class="section-tag">How it works</p>
+              </div>
+              <ol class="process-list">
+                <li>Select a challenge</li>
+                <li>Answer with focus</li>
+                <li>Track your growth</li>
+              </ol>
+            </div>
+
+            <div class="showcase-card glass-card leaderboard-preview">
+              <div class="showcase-header">
+                <p class="section-tag">Leaderboard preview</p>
+                <span class="chip muted">Weekly</span>
+              </div>
+              <div class="podium-list">
+                <div class="rank-row"><span>#1</span><strong>Nova</strong><em>980</em></div>
+                <div class="rank-row"><span>#2</span><strong>Pixel</strong><em>940</em></div>
+                <div class="rank-row"><span>#3</span><strong>Echo</strong><em>920</em></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cta-banner glass-card">
+            <div>
+              <p class="section-tag">Stay sharp</p>
+              <h3>Build momentum with every round.</h3>
+            </div>
+            <button id="startQuizBtnSecondary" class="primary-btn" type="button">Start Challenge</button>
+          </div>
+
+          <footer class="footer-card glass-card">
+            <div>
+              <strong>AI &amp; IoT Quiz Arena</strong>
+              <small>Focused practice for modern technology careers.</small>
+            </div>
+            <div class="footer-links">
+              <span>Home</span>
+              <span>Leaderboard</span>
+              <span>History</span>
+            </div>
+          </footer>
+
+          <div class="home-grid">
+            <div class="config-card glass-card">
+              <h3>Start a new challenge</h3>
+
+              <div class="field-group">
+                <label for="playerNameInput">Player name</label>
+                <input
+                  id="playerNameInput"
+                  name="playerName"
+                  type="text"
+                  maxlength="30"
+                  placeholder="Enter your name"
+                  aria-label="Player name"
+                />
+              </div>
+
+              <div class="field-group">
+                <span class="label-title">Category</span>
+                <div class="option-grid" role="radiogroup" aria-label="Select category">
+                  <label class="option-card selected" data-category-option>
+                    <input type="radio" name="category" value="AI" checked />
+                    <span>AI</span>
+                  </label>
+                  <label class="option-card" data-category-option>
+                    <input type="radio" name="category" value="IoT" />
+                    <span>IoT</span>
+                  </label>
+                  <label class="option-card" data-category-option>
+                    <input type="radio" name="category" value="Mixed" />
+                    <span>Mixed</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="field-group">
+                <span class="label-title">Difficulty</span>
+                <div class="option-grid" role="radiogroup" aria-label="Select difficulty">
+                  <label class="option-card selected" data-difficulty-option>
+                    <input type="radio" name="difficulty" value="Easy" checked />
+                    <span>Easy</span>
+                  </label>
+                  <label class="option-card" data-difficulty-option>
+                    <input type="radio" name="difficulty" value="Medium" />
+                    <span>Medium</span>
+                  </label>
+                  <label class="option-card" data-difficulty-option>
+                    <input type="radio" name="difficulty" value="Hard" />
+                    <span>Hard</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="field-group">
+                <span class="label-title">Quiz mode</span>
+                <div class="mode-grid" role="radiogroup" aria-label="Select quiz mode">
+                  <label class="mode-card selected" data-mode-option>
+                    <input type="radio" name="quizMode" value="Practice Mode" checked />
+                    <span>Practice</span>
+                  </label>
+                  <label class="mode-card" data-mode-option>
+                    <input type="radio" name="quizMode" value="Timed Challenge" />
+                    <span>Timed</span>
+                  </label>
+                  <label class="mode-card" data-mode-option>
+                    <input type="radio" name="quizMode" value="Survival Mode" />
+                    <span>Survival</span>
+                  </label>
+                  <label class="mode-card" data-mode-option>
+                    <input type="radio" name="quizMode" value="Quick Quiz" />
+                    <span>Quick</span>
+                  </label>
+                </div>
+              </div>
+
+              <div id="configMessage" class="inline-message" aria-live="polite"></div>
+            </div>
+
+            <div class="daily-card glass-card">
+              <h3>Today's Challenge</h3>
+              <div id="dailyChallengeInfo" class="daily-info"></div>
+              <button id="playDailyChallengeBtn" class="primary-btn" type="button">Play Daily Challenge</button>
+            </div>
+          </div>
+
+          <div id="howToPlayPanel" class="info-card glass-card">
+            <h3>How to play</h3>
+            <ol>
+              <li>Enter a player name and choose a category, difficulty, and quiz mode.</li>
+              <li>Answer before the timer runs out and build streaks for bonus points.</li>
+              <li>Use hints and power-ups strategically to improve your performance.</li>
+              <li>Review your results, bookmarks, achievements, and analytics after each round.</li>
+            </ol>
+          </div>
+        </section>
+
+        <section id="quizPage" class="page-panel" aria-label="Quiz page">
+          <div class="quiz-header glass-card">
+            <div>
+              <p class="section-tag">Question progress</p>
+              <h3 id="questionMeta">Question 1 of 1</h3>
+            </div>
+            <div class="score-summary">
+              <span>Score</span>
+              <strong id="scoreBadge">0</strong>
+            </div>
+          </div>
+
+          <div class="progress-section glass-card">
+            <div class="progress-meta">
+              <span id="progressLabel">0%</span>
+              <span id="timerBadge" aria-live="polite">15s</span>
+            </div>
+            <div class="progress-bar" aria-hidden="true">
+              <span id="progressFill"></span>
+            </div>
+          </div>
+
+          <div class="utility-row glass-card">
+            <div class="mini-stat">
+              <span>🔥 Streak</span>
+              <strong id="currentStreakValue">0</strong>
+            </div>
+            <div class="mini-stat">
+              <span>🏆 Best</span>
+              <strong id="bestStreakValue">0</strong>
+            </div>
+            <div class="mini-stat">
+              <span>Mode</span>
+              <strong id="quizModeValue">Practice</strong>
+            </div>
+          </div>
+
+          <div class="question-card glass-card">
+            <div class="question-toolbar">
+              <button id="bookmarkBtn" class="secondary-btn" type="button">Bookmark</button>
+              <button id="hintBtn" class="secondary-btn" type="button">Hint</button>
+            </div>
+
+            <div class="powerup-row" aria-label="Available power-ups">
+              <button id="power50Btn" class="power-btn" type="button">50/50</button>
+              <button id="powerTimeBtn" class="power-btn" type="button">Extra Time</button>
+              <button id="powerSkipBtn" class="power-btn" type="button">Skip</button>
+            </div>
+
+            <div id="questionText" class="question-text">Loading question...</div>
+            <div id="optionsContainer" class="options-container" aria-live="polite"></div>
+            <div id="feedbackBox" class="feedback-box" aria-live="polite"></div>
+            <div class="quiz-actions">
+              <button id="nextQuestionBtn" class="primary-btn hidden" type="button">Next Question</button>
+            </div>
+          </div>
+        </section>
+
+        <section id="resultsPage" class="page-panel" aria-label="Results page">
+          <div class="results-card glass-card">
+            <p class="section-tag">Round complete</p>
+            <h2 id="resultTitle">Quiz Results</h2>
+            <div class="result-score" id="finalScore">0</div>
+            <p id="performanceMessage" class="performance-message">Performance summary</p>
+
+            <div class="stats-grid">
+              <div class="stat-box">
+                <span>Score</span>
+                <strong id="resultScore">0</strong>
+              </div>
+              <div class="stat-box">
+                <span>Percentage</span>
+                <strong id="resultPercentage">0%</strong>
+              </div>
+              <div class="stat-box">
+                <span>Accuracy</span>
+                <strong id="resultAccuracy">0%</strong>
+              </div>
+              <div class="stat-box">
+                <span>Correct</span>
+                <strong id="resultCorrect">0</strong>
+              </div>
+              <div class="stat-box">
+                <span>Wrong</span>
+                <strong id="resultWrong">0</strong>
+              </div>
+              <div class="stat-box">
+                <span>Unanswered</span>
+                <strong id="resultUnanswered">0</strong>
+              </div>
+              <div class="stat-box">
+                <span>Avg. Time</span>
+                <strong id="resultAverageTime">0s</strong>
+              </div>
+              <div class="stat-box">
+                <span>Best Streak</span>
+                <strong id="resultBestStreak">0</strong>
+              </div>
+              <div class="stat-box">
+                <span>Mode</span>
+                <strong id="resultMode">Practice</strong>
+              </div>
+            </div>
+
+            <div class="results-actions">
+              <button id="retryQuizBtn" class="primary-btn" type="button">Try Again</button>
+              <button id="homeBtn" class="secondary-btn" type="button">Go Home</button>
+              <button id="reviewAnswersBtn" class="secondary-btn" type="button">Review Answers</button>
+              <button id="leaderboardBtn" class="secondary-btn" type="button">Leaderboard</button>
+              <button id="historyBtn" class="secondary-btn" type="button">History</button>
+            </div>
+
+            <div id="reviewAnswersContainer" class="review-answers-container"></div>
+          </div>
+        </section>
+
+        <section id="leaderboardPage" class="page-panel" aria-label="Local leaderboard page">
+          <div class="panel-header glass-card">
+            <div>
+              <p class="section-tag">Local performance</p>
+              <h2>Local Leaderboard</h2>
+            </div>
+            <div class="leaderboard-tabs" aria-label="Leaderboard time ranges">
+              <button class="leaderboard-tab active" type="button">Daily</button>
+              <button class="leaderboard-tab" type="button">Weekly</button>
+              <button class="leaderboard-tab" type="button">All Time</button>
+            </div>
+          </div>
+          <div class="table-card glass-card">
+            <div class="table-wrap">
+              <table aria-label="Local leaderboard table">
+                <thead>
+                  <tr>
+                    <th>Rank</th>
+                    <th>Player</th>
+                    <th>Score</th>
+                    <th>Accuracy</th>
+                    <th>Category</th>
+                    <th>Difficulty</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody id="leaderboardTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section id="historyPage" class="page-panel" aria-label="Quiz history page">
+          <div class="panel-header glass-card">
+            <div>
+              <p class="section-tag">Saved attempts</p>
+              <h2>Quiz History</h2>
+            </div>
+            <button id="clearHistoryBtn" class="danger-btn" type="button">Clear History</button>
+          </div>
+
+          <div class="table-card glass-card">
+            <div class="table-wrap">
+              <table aria-label="Quiz history table">
+                <thead>
+                  <tr>
+                    <th>Player</th>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Difficulty</th>
+                    <th>Mode</th>
+                    <th>Score</th>
+                    <th>Accuracy</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="historyTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section id="bookmarksPage" class="page-panel" aria-label="Bookmarks page">
+          <div class="panel-header glass-card">
+            <div>
+              <p class="section-tag">Saved topics</p>
+              <h2>My Bookmarks</h2>
+            </div>
+          </div>
+          <div id="bookmarksContainer" class="bookmark-list"></div>
+        </section>
+
+        <section id="achievementsPage" class="page-panel" aria-label="Achievements page">
+          <div class="panel-header glass-card">
+            <div>
+              <p class="section-tag">Progress</p>
+              <h2>Achievements</h2>
+            </div>
+          </div>
+          <div id="achievementsContainer" class="achievement-grid"></div>
+        </section>
+
+        <section id="analyticsPage" class="page-panel" aria-label="Analytics page">
+          <div class="panel-header glass-card">
+            <div>
+              <p class="section-tag">Insights</p>
+              <h2>Performance Analytics</h2>
+            </div>
+          </div>
+          <div id="analyticsSummary" class="analytics-summary"></div>
+          <div class="analytics-grid">
+            <div class="glass-card analytics-card">
+              <h3>Category Accuracy</h3>
+              <div id="categoryBarChart" class="bar-chart"></div>
+            </div>
+            <div class="glass-card analytics-card">
+              <h3>Difficulty Accuracy</h3>
+              <div id="difficultyBarChart" class="bar-chart"></div>
+            </div>
+          </div>
+          <div id="weakTopicAnalysis" class="glass-card analytics-card"></div>
+        </section>
+      </main>
     </div>
-    <div id="scoreBox"></div>
-    <div id="resultBox"></div>
-    <div style="text-align: center; margin-top: 10px;">
-      <button id="exportBtn" onclick="exportScore()" style="display:none;">Export Result</button>
-    </div>
-  </div>
 
-  <script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
+</html>
+
 </html>
